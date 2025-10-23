@@ -1,6 +1,10 @@
 package tn.esprit.gestionzoo.main;
 
 import tn.esprit.gestionzoo.entities.Animal;
+import tn.esprit.gestionzoo.entities.Aquatic;
+import tn.esprit.gestionzoo.entities.Dolphin;
+import tn.esprit.gestionzoo.entities.Penguin;
+import tn.esprit.gestionzoo.entities.Terrestrial;
 import tn.esprit.gestionzoo.entities.Zoo;
 
 public class ZooManagment {
@@ -56,5 +60,34 @@ public class ZooManagment {
         zooB.addAnimal(new Animal("Felidae", "Tigre", 6, true));
         Zoo plusGrandZoo = Zoo.comparerZoo(zooA, zooB);
         System.out.println("\nLe zoo avec le plus d'animaux est : " + plusGrandZoo.getName() + " (" + plusGrandZoo.getCity() + ")");
+    // --- Instructions 20-24: create instances of Aquatic/Terrestrial and subclasses
+    // Default instances
+    Aquatic aquaticDefault = new Aquatic();
+    Terrestrial terrestrialDefault = new Terrestrial();
+    Dolphin dolphinDefault = new Dolphin();
+    Penguin penguinDefault = new Penguin();
+
+    // Parameterized instances
+    Aquatic aquatic = new Aquatic("Pisces", "Fish", 2, false, "Ocean");
+    Terrestrial terrestrial = new Terrestrial("Insecta", "Ant", 1, false, 6);
+    Dolphin dolphin = new Dolphin("Mammalia", "Flipper", 8, true, "Sea", 12.5f);
+    Penguin penguin = new Penguin("Aves", "Pingu", 4, false, "Antarctica", 30.0f);
+
+    // Print objects
+    System.out.println("\nInstances créées :");
+    System.out.println(aquaticDefault);
+    System.out.println(terrestrialDefault);
+    System.out.println(dolphinDefault);
+    System.out.println(penguinDefault);
+    System.out.println(aquatic);
+    System.out.println(terrestrial);
+    System.out.println(dolphin);
+    System.out.println(penguin);
+
+    // Call swim on Aquatic, Dolphin and Penguin
+    System.out.println("\nAppel de swim() :");
+    aquatic.swim();
+    dolphin.swim();
+    penguin.swim();
     }
 }

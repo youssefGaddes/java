@@ -1,9 +1,9 @@
 package tn.esprit.gestionzoo.entities;
 
 public class Zoo {
-    private Animal[] animals;
-    private String name;
-    private String city;
+    private final Animal[] animals;
+    private final String name;
+    private final String city;
     public static final int NBR_CAGES = 25;
     private int animalCount;
 

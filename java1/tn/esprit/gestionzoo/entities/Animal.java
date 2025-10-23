@@ -1,16 +1,29 @@
 package tn.esprit.gestionzoo.entities;
 
 public class Animal {
-    private String family;
+    private final String family;
     private String name;
     private int age;
-    private boolean isMammal;
+    private final boolean isMammal;
 
     public Animal(String family, String name, int age, boolean isMammal) {
-        this.family = family;
-        this.name = name;
-        setAge(age);
+        this.family = (family == null) ? "" : family;
+        this.name = (name == null) ? "" : name;
+        // validate age without calling an overridable method
+        if (age < 0) {
+            this.age = 0;
+        } else {
+            this.age = age;
+        }
         this.isMammal = isMammal;
+    }
+
+    // Default constructor needed for subclass default constructors
+    public Animal() {
+        this.family = "";
+        this.name = "";
+        this.age = 0;
+        this.isMammal = false;
     }
 
     public String getFamily() { return family; }
