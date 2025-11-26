@@ -4,7 +4,7 @@ public class Zoo {
     private final Animal[] animals;
     private final String name;
     private final String city;
-    public static final int NBR_CAGES = 25;
+    public static final int NBR_CAGES = 3;
     private int animalCount;
     // aquatic animals collection (up to 10)
     private final Aquatic[] aquaticAnimals = new Aquatic[10];
@@ -28,34 +28,45 @@ public class Zoo {
     public Aquatic[] getAquaticAnimals() { return aquaticAnimals; }
     public int getAquaticCount() { return aquaticCount; }
 
-    public boolean addAnimal(Animal animal) {
-        for (Animal animal1 : animals) {
-            if (animal1 != null && animal1.getName().equals(animal.getName())) {
-                return false;
+    public void addAnimal(Animal animal) throws ZooFullException, InvalidAgeException {
+        if (animal == null) return;
+        // forbid animals with negative age
+        if (animal.getAge() < 0) {
+            throw new InvalidAgeException("Animal has negative age: " + animal.getAge());
+        }
+        // Vérifier unicité
+        for (Animal existing : animals) {
+            if (existing != null && existing.getName().equals(animal.getName())) {
+                return; // already present, do nothing
             }
         }
-        if (isZooFull()) {
-            return false;
+        // Vérifier capacité and throw if full
+        if (animalCount >= animals.length) {
+            throw new ZooFullException("Zoo is full (max " + animals.length + ")");
         }
         for (int i = 0; i < animals.length; i++) {
             if (animals[i] == null) {
                 animals[i] = animal;
                 animalCount++;
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     public boolean addAquaticAnimal(Aquatic aquatic) {
         if (aquatic == null) return false;
+        // forbid animals with negative age
+        if (aquatic.getAge() < 0) {
+            // let caller decide; here we just return false
+            return false;
+        }
         // check uniqueness based on Aquatic.equals
         for (Aquatic existing : aquaticAnimals) {
             if (existing != null && existing.equals(aquatic)) {
                 return false;
             }
         }
-        // check capacity
+        // check capacity and throw
         if (aquaticCount >= aquaticAnimals.length) return false;
         for (int i = 0; i < aquaticAnimals.length; i++) {
             if (aquaticAnimals[i] == null) {

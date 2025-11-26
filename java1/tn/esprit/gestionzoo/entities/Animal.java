@@ -9,12 +9,8 @@ public class Animal {
     public Animal(String family, String name, int age, boolean isMammal) {
         this.family = (family == null) ? "" : family;
         this.name = (name == null) ? "" : name;
-        // validate age without calling an overridable method
-        if (age < 0) {
-            this.age = 0;
-        } else {
-            this.age = age;
-        }
+        // store age as given; validation on add will be handled by Zoo
+        this.age = age;
         this.isMammal = isMammal;
     }
 
