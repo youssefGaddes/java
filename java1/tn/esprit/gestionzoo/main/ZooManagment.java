@@ -3,6 +3,7 @@ package tn.esprit.gestionzoo.main;
 import tn.esprit.gestionzoo.entities.Animal;
 import tn.esprit.gestionzoo.entities.Aquatic;
 import tn.esprit.gestionzoo.entities.Dolphin;
+import tn.esprit.gestionzoo.entities.Food;
 import tn.esprit.gestionzoo.entities.Penguin;
 import tn.esprit.gestionzoo.entities.Terrestrial;
 import tn.esprit.gestionzoo.entities.Zoo;
@@ -100,6 +101,15 @@ public class ZooManagment {
     Terrestrial terrestrial = new Terrestrial("Insecta", "Ant", 1, false, 6);
     Dolphin dolphin = new Dolphin("Mammalia", "Flipper", 8, true, "Sea", 12.5f);
     Penguin penguin = new Penguin("Aves", "Pingu", 4, false, "Antarctica", 30.0f);
+
+    // Test diet interfaces (Instruction 35-38)
+    Aquatic aquatic = dolphin; // Aquatic reference to a Dolphin instance
+    System.out.println("\nTest des interfaces alimentaires :");
+    aquatic.eatMeat(Food.MEAT); // Aquatic (Dolphin) eats meat
+    penguin.eatMeat(Food.PLANT); // Penguin (Aquatic) offered PLANT
+    terrestrial.eatPlant(Food.PLANT);
+    terrestrial.eatMeat(Food.MEAT);
+    terrestrial.eatPlantAndMeet(Food.BOTH);
 
     // Add aquatic animals to zoo (addAquaticAnimal returns boolean)
     boolean ok;
