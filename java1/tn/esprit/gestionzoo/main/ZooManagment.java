@@ -62,32 +62,39 @@ public class ZooManagment {
         System.out.println("\nLe zoo avec le plus d'animaux est : " + plusGrandZoo.getName() + " (" + plusGrandZoo.getCity() + ")");
     // --- Instructions 20-24: create instances of Aquatic/Terrestrial and subclasses
     // Default instances
-    Aquatic aquaticDefault = new Aquatic();
     Terrestrial terrestrialDefault = new Terrestrial();
     Dolphin dolphinDefault = new Dolphin();
     Penguin penguinDefault = new Penguin();
 
-    // Parameterized instances
-    Aquatic aquatic = new Aquatic("Pisces", "Fish", 2, false, "Ocean");
+    // Parameterized instances (Aquatic is abstract, use concrete subclasses)
     Terrestrial terrestrial = new Terrestrial("Insecta", "Ant", 1, false, 6);
     Dolphin dolphin = new Dolphin("Mammalia", "Flipper", 8, true, "Sea", 12.5f);
     Penguin penguin = new Penguin("Aves", "Pingu", 4, false, "Antarctica", 30.0f);
 
+    // Add aquatic animals to zoo
+    myZoo.addAquaticAnimal(dolphin);
+    myZoo.addAquaticAnimal(penguin);
+    myZoo.addAquaticAnimal(dolphinDefault);
+    myZoo.addAquaticAnimal(penguinDefault);
+
     // Print objects
     System.out.println("\nInstances créées :");
-    System.out.println(aquaticDefault);
     System.out.println(terrestrialDefault);
     System.out.println(dolphinDefault);
     System.out.println(penguinDefault);
-    System.out.println(aquatic);
     System.out.println(terrestrial);
     System.out.println(dolphin);
     System.out.println(penguin);
 
-    // Call swim on Aquatic, Dolphin and Penguin
-    System.out.println("\nAppel de swim() :");
-    aquatic.swim();
-    dolphin.swim();
-    penguin.swim();
+        // Call swim() on all aquatic animals stored in the zoo
+        System.out.println("\nAppel de swim() pour tous les animaux aquatiques du zoo :");
+        for (Aquatic a : myZoo.getAquaticAnimals()) {
+            if (a != null) a.swim();
+        }
+
+        // Display max penguin swimming depth and counts by type
+        float maxDepth = myZoo.maxPenguinSwimmingDepth();
+        System.out.println("\nProfondeur maximale des pingouins : " + maxDepth);
+        myZoo.displayNumberOfAquaticsByType();
     }
 }
